@@ -1,18 +1,12 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { GoogleGenAI } from "@google/genai";
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-// ✅ NEW API (IMPORTANT)
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-});
 
 app.post("/api/chat", (req, res) => {
   const { message } = req.body;
@@ -32,5 +26,8 @@ app.post("/api/chat", (req, res) => {
   res.json({ reply });
 });
 
+app.get("/", (req, res) => {
+  res.send("Backend is working ✅");
+});
 
 app.listen(5000, () => console.log("Server running on port 5000"));
