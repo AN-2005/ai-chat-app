@@ -7,7 +7,7 @@ function App() {
 
   const bottomRef = useRef(null);
 
-  // Auto scroll to latest message
+  // Auto scroll
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -22,13 +22,16 @@ function App() {
     setLoading(true);
 
     try {
-      const res = await fetch("https://your-backend-url.onrender.com/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: input }),
-      });
+      const res = await fetch(
+        "https://ai-chat-app-dn5l.onrender.com/api/chat",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: input }),
+        }
+      );
 
       const data = await res.json();
 
@@ -51,7 +54,7 @@ function App() {
 
   return (
     <div className="h-screen bg-gray-900 text-white flex flex-col">
-
+      
       {/* Header */}
       <h1 className="text-center text-2xl font-bold p-4 border-b border-gray-700">
         AI Chat App 🤖
@@ -59,7 +62,7 @@ function App() {
 
       {/* Chat Area */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
-
+        
         {messages.map((msg, index) => (
           <div
             key={index}
